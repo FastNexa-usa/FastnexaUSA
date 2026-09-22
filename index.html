@@ -1,240 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fastnexa USA | Digital Solutions</title>
 
-  <title>FastNexa USA | Digital Solutions</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #f5f7fb;
-      color: #222;
-      line-height: 1.6;
-    }
-
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-    }
-
-    .hero {
-      padding: 90px 7%;
-      text-align: center;
-      background: linear-gradient(135deg, #111827, #2563eb);
-      color: white;
-    }
-
-    .hero h1 {
-      font-size: 45px;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      max-width: 650px;
-      margin: auto;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 13px 25px;
-      background: white;
-      color: #2563eb;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    section {
-      padding: 60px 7%;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 32px;
-      margin-bottom: 30px;
-    }
-
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 30px 20px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      color: #2563eb;
-    }
-
-    .contact-box {
-      background: white;
-      max-width: 600px;
-      margin: auto;
-      padding: 35px 20px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
-
-    .contact-btn {
-      display: block;
-      margin: 15px auto;
-      max-width: 300px;
-      padding: 14px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-    }
-
-    .whatsapp {
-      background: #25D366;
-    }
-
-    .telegram {
-      background: #229ED9;
-    }
-
-    footer {
-      background: #111827;
-      color: white;
-      text-align: center;
-      padding: 25px;
-    }
-
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 34px;
-      }
-
-      nav a {
-        margin-left: 8px;
-        font-size: 14px;
-      }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;color:#132033;background:#f7f9fc;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e7ebf2}
+.navin{max-width:1100px;margin:auto;padding:16px 22px;display:flex;justify-content:space-between}
+.logo{font-size:23px;font-weight:800}
+.logo span{color:#1769ff}
+.links{display:flex;gap:22px}
+.hero{background:linear-gradient(135deg,#0d1b34,#1769ff);color:#fff}
+.heroin{max-width:1100px;margin:auto;padding:95px 22px}
+.badge{padding:7px 12px;border:1px solid #ffffff45;border-radius:30px}
+h1{font-size:clamp(42px,7vw,72px);line-height:1.05;margin:20px 0;max-width:780px}
+.hero p{max-width:650px;font-size:18px;color:#dce8ff}
+.btn{display:inline-block;padding:13px 20px;border-radius:9px;background:#fff;color:#1357d4;font-weight:700;margin:12px 8px 0 0}
+.btn.alt{background:#ffffff16;color:#fff;border:1px solid #ffffff45}
+section{max-width:1100px;margin:auto;padding:75px 22px}
+.eyebrow{color:#1769ff;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1px}
+h2{font-size:36px;margin:8px 0 14px}
+.intro{max-width:650px;color:#667085}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.card{background:#fff;border:1px solid #e7ebf2;border-radius:16px;padding:26px;box-shadow:0 8px 25px #13203308}
+.icon{font-size:28px}
+.card h3{margin:10px 0 5px}
+.card p{color:#667085;font-size:14px}
+.about{background:#eef4ff;max-width:none}
+.aboutin,.contactin{max-width:1100px;margin:auto;padding:75px 22px}
+.contact{background:#0d1b34;color:#fff;max-width:none}
+.contact p{color:#cbd7ed}
+.contactbox{margin-top:25px;background:#ffffff10;border:1px solid #ffffff20;padding:25px;border-radius:15px;max-width:620px}
+footer{background:#091326;color:#aebbd0;text-align:center;padding:25px;font-size:13px}
+@media(max-width:700px){
+.links{display:none}
+.grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">FastNexaUSA</div>
+<nav class="nav">
+<div class="navin">
+<div class="logo">Fastnexa<span>USA</span></div>
+<div class="links">
+<a href="#services">Services</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
+</nav>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<header class="hero">
+<div class="heroin">
+<span class="badge">Gmail & Digital Support Services</span>
+
+<h1>Build your business for the digital world.</h1>
+
+<p>
+Fastnexa USA provides Gmail-focused support and practical digital services
+for customers who need reliable online assistance.
+</p>
+
+<a class="btn" href="#contact">Get Started</a>
+<a class="btn alt" href="#services">Explore Services</a>
+</div>
 </header>
 
-<section class="hero" id="home">
-  <h1>Welcome to FastNexaUSA</h1>
-
-  <p>
-    Simple and reliable digital solutions for your everyday online needs.
-  </p>
-
-  <a href="#services" class="btn">Explore Services</a>
-</section>
-
 <section id="services">
-  <h2>Our Services</h2>
 
-  <div class="services">
+<div class="eyebrow">What we do</div>
+<h2>Our Services</h2>
 
-    <div class="card">
-      <h3>📧 Gmail Support</h3>
-      <p>
-        Gmail account setup guidance, settings configuration,
-        security and recovery guidance.
-      </p>
-    </div>
+<p class="intro">
+Flexible digital services designed to help businesses present themselves professionally online.
+</p>
 
-    <div class="card">
-      <h3>💼 Business Email</h3>
-      <p>
-        Guidance for setting up and managing professional email
-        solutions for your business.
-      </p>
-    </div>
+<div class="grid">
 
-    <div class="card">
-      <h3>🔐 Account Security</h3>
-      <p>
-        General guidance for improving account security,
-        recovery options and safe online practices.
-      </p>
-    </div>
+<div class="card">
+<div class="icon">📧</div>
+<h3>Gmail Support</h3>
+<p>Guidance and support for common Gmail-related needs and account issues.</p>
+</div>
 
-    <div class="card">
-      <h3>💻 Digital Support</h3>
-      <p>
-        Helpful guidance for common digital and online service needs.
-      </p>
-    </div>
+<div class="card">
+<div class="icon">🔐</div>
+<h3>Account Security</h3>
+<p>General guidance for improving account security and protecting your online presence.</p>
+</div>
 
-  </div>
+<div class="card">
+<div class="icon">🛠️</div>
+<h3>Digital Assistance</h3>
+<p>Practical help with everyday digital services and online tasks.</p>
+</div>
+
+<div class="card">
+<div class="icon">📱</div>
+<h3>Mobile Support</h3>
+<p>Mobile-friendly assistance for customers using phones and other devices.</p>
+</div>
+
+<div class="card">
+<div class="icon">💬</div>
+<h3>Customer Support</h3>
+<p>Contact us through WhatsApp or Telegram to discuss your support needs.</p>
+</div>
+
+<div class="card">
+<div class="icon">💡</div>
+<h3>Digital Guidance</h3>
+<p>Clear, practical recommendations based on your digital needs.</p>
+</div>
+
+</div>
 </section>
 
-<section id="contact">
-  <h2>Contact Us</h2>
+<div class="about" id="about">
+<div class="aboutin">
 
-  <div class="contact-box">
+<div class="eyebrow">About Fastnexa USA</div>
 
-    <p>Need help? Contact FastNexaUSA.</p>
+<h2>Technology made simpler.</h2>
 
-    <a
-      class="contact-btn whatsapp"
-      href="https://wa.me/1606468334"
-      target="_blank">
-      💬 Contact on WhatsApp
-    </a>
+<p class="intro">
+We focus on practical digital solutions that help businesses communicate clearly,
+look professional and build a stronger presence online.
+</p>
 
-    <a
-      class="contact-btn telegram"
-      href="https://t.me/fastnexausa"
-      target="_blank">
-      ✈️ Contact on Telegram
-    </a>
+</div>
+</div>
 
-  </div>
-</section>
+<div class="contact" id="contact">
+<div class="contactin">
+
+<div class="eyebrow" style="color:#8db5ff">Let's connect</div>
+
+<h2>Ready to start?</h2>
+
+<p>Tell us what you need and we'll discuss the next step.</p>
+
+<div class="contactbox">
+
+<p><strong>Email:</strong> hello@fastnexausa.com</p>
+
+<p><strong>WhatsApp:</strong> +1 606 468 3334</p>
+
+<p><strong>Telegram:</strong> @fastnexausa</p>
+
+<a class="btn"
+href="https://wa.me/16064683334"
+target="_blank"
+rel="noopener">
+WhatsApp
+</a>
+
+<a class="btn alt"
+href="https://t.me/fastnexausa"
+target="_blank"
+rel="noopener">
+Telegram
+</a>
+
+<a class="btn"
+href="mailto:hello@fastnexausa.com">
+Email Us
+</a>
+
+</div>
+</div>
+</div>
 
 <footer>
-  <p>© 2026 FastNexaUSA. All rights reserved.</p>
+© 2026 Fastnexa USA. All rights reserved.
 </footer>
 
 </body>
