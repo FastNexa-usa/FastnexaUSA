@@ -1,75 +1,634 @@
-<script>
-const SUPABASE_URL = "https://cbcqktsporbfubfyjdpd.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_l9F1Q_dguZpJUs-PmimxNQ_Qq09y3Sr";
-const BUCKET = "uploads";
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-async function loadGallery() {
-  const gallery = document.getElementById("galleryGrid");
+<title>Fastnexa USA | Digital Solutions</title>
 
-  try {
-    const response = await fetch(
-      `${SUPABASE_URL}/storage/v1/object/list/${BUCKET}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_ANON_KEY,
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-        },
-        body: JSON.stringify({
-          prefix: "",
-          limit: 100,
-          offset: 0,
-          sortBy: {
-            column: "created_at",
-            order: "desc"
-          }
-        })
-      }
-    );
+<style>
+*{box-sizing:border-box}
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Supabase error:", errorText);
-      throw new Error("Could not load images");
-    }
-
-    const files = await response.json();
-
-    const images = files.filter(file =>
-      /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file.name)
-    );
-
-    if (!images.length) {
-      gallery.innerHTML =
-        '<p class="gallerymsg">No images found.</p>';
-      return;
-    }
-
-    gallery.innerHTML = "";
-
-    images.forEach(file => {
-      const imageUrl =
-        `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${encodeURIComponent(file.name)}`;
-
-      const item = document.createElement("div");
-      item.className = "galleryitem";
-
-      item.innerHTML = `
-        <img src="${imageUrl}" alt="Fastnexa USA image" loading="lazy">
-        <p>${file.name}</p>
-      `;
-
-      gallery.appendChild(item);
-    });
-
-  } catch (error) {
-    console.error(error);
-
-    gallery.innerHTML =
-      '<p class="gallerymsg">Unable to load gallery images.</p>';
-  }
+body{
+margin:0;
+font-family:Arial,sans-serif;
+color:#132033;
+background:#f7f9fc;
+line-height:1.6
 }
 
+a{text-decoration:none;color:inherit}
+
+.nav{
+position:sticky;
+top:0;
+background:#fff;
+border-bottom:1px solid #e7ebf2;
+z-index:10
+}
+
+.navin{
+max-width:1100px;
+margin:auto;
+padding:16px 22px;
+display:flex;
+justify-content:space-between
+}
+
+.logo{
+font-size:23px;
+font-weight:800
+}
+
+.logo span{color:#1769ff}
+
+.links{
+display:flex;
+gap:22px
+}
+
+.hero{
+background:linear-gradient(135deg,#0d1b34,#1769ff);
+color:#fff
+}
+
+.heroin{
+max-width:1100px;
+margin:auto;
+padding:95px 22px
+}
+
+.badge{
+padding:7px 12px;
+border:1px solid #ffffff45;
+border-radius:30px
+}
+
+h1{
+font-size:clamp(42px,7vw,72px);
+line-height:1.05;
+margin:20px 0;
+max-width:780px
+}
+
+.hero p{
+max-width:650px;
+font-size:18px;
+color:#dce8ff
+}
+
+.btn{
+display:inline-block;
+padding:13px 20px;
+border-radius:9px;
+background:#fff;
+color:#1357d4;
+font-weight:700;
+margin:12px 8px 0 0
+}
+
+.btn.alt{
+background:#ffffff16;
+color:#fff;
+border:1px solid #ffffff45
+}
+
+section{
+max-width:1100px;
+margin:auto;
+padding:75px 22px
+}
+
+.eyebrow{
+color:#1769ff;
+font-weight:800;
+font-size:13px;
+text-transform:uppercase;
+letter-spacing:1px
+}
+
+h2{
+font-size:36px;
+margin:8px 0 14px
+}
+
+.intro{
+max-width:650px;
+color:#667085
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+margin-top:30px
+}
+
+.card{
+background:#fff;
+border:1px solid #e7ebf2;
+border-radius:16px;
+padding:26px;
+box-shadow:0 8px 25px #13203308
+}
+
+.icon{font-size:28px}
+
+.card h3{
+margin:10px 0 5px
+}
+
+.card p{
+color:#667085;
+font-size:14px
+}
+
+.gallery{
+background:#fff;
+max-width:none
+}
+
+.galleryin{
+max-width:1100px;
+margin:auto;
+padding:75px 22px
+}
+
+.gallerygrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+margin-top:30px
+}
+
+.galleryitem{
+background:#f7f9fc;
+border:1px solid #e7ebf2;
+border-radius:16px;
+overflow:hidden
+}
+
+.galleryitem img{
+width:100%;
+height:230px;
+object-fit:cover;
+display:block
+}
+
+.galleryitem p{
+margin:0;
+padding:12px 15px;
+color:#667085;
+font-size:14px
+}
+
+.gallerymsg{
+color:#667085;
+margin-top:20px
+}
+
+.about{
+background:#eef4ff;
+max-width:none
+}
+
+.aboutin,
+.contactin{
+max-width:1100px;
+margin:auto;
+padding:75px 22px
+}
+
+.contact{
+background:#0d1b34;
+color:#fff;
+max-width:none
+}
+
+.contact p{
+color:#cbd7ed
+}
+
+.contactbox{
+margin-top:25px;
+background:#ffffff10;
+border:1px solid #ffffff20;
+padding:25px;
+border-radius:15px;
+max-width:620px
+}
+
+footer{
+background:#091326;
+color:#aebbd0;
+text-align:center;
+padding:25px;
+font-size:13px
+}
+
+@media(max-width:700px){
+
+.links{
+display:none
+}
+
+.grid{
+grid-template-columns:1fr
+}
+
+.gallerygrid{
+grid-template-columns:1fr
+}
+
+.galleryitem img{
+height:250px
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+
+<div class="navin">
+
+<div class="logo">
+Fastnexa<span>USA</span>
+</div>
+
+<div class="links">
+
+<a href="#services">Services</a>
+<a href="#gallery">Gallery</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<header class="hero">
+
+<div class="heroin">
+
+<span class="badge">
+Gmail & Digital Support Services
+</span>
+
+<h1>
+Build your business for the digital world.
+</h1>
+
+<p>
+Fastnexa USA provides Gmail-focused support and practical digital services
+for customers who need reliable online assistance.
+</p>
+
+<a class="btn" href="#contact">
+Get Started
+</a>
+
+<a class="btn alt" href="#services">
+Explore Services
+</a>
+
+</div>
+
+</header>
+
+
+<section id="services">
+
+<div class="eyebrow">
+What we do
+</div>
+
+<h2>
+Our Services
+</h2>
+
+<p class="intro">
+Flexible digital services designed to help businesses present themselves professionally online.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">📧</div>
+<h3>Gmail Support</h3>
+<p>
+Guidance and support for common Gmail-related needs and account issues.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🔐</div>
+<h3>Account Security</h3>
+<p>
+General guidance for improving account security and protecting your online presence.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🛠️</div>
+<h3>Digital Assistance</h3>
+<p>
+Practical help with everyday digital services and online tasks.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">📱</div>
+<h3>Mobile Support</h3>
+<p>
+Mobile-friendly assistance for customers using phones and other devices.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">💬</div>
+<h3>Customer Support</h3>
+<p>
+Contact us through WhatsApp or Telegram to discuss your support needs.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">💡</div>
+<h3>Digital Guidance</h3>
+<p>
+Clear, practical recommendations based on your digital needs.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<div class="gallery" id="gallery">
+
+<div class="galleryin">
+
+<div class="eyebrow">
+Our Gallery
+</div>
+
+<h2>
+Uploaded Images
+</h2>
+
+<p class="intro">
+Images uploaded to our Supabase storage will appear here.
+</p>
+
+<div id="galleryGrid" class="gallerygrid">
+
+<p class="gallerymsg">
+Loading images...
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="about" id="about">
+
+<div class="aboutin">
+
+<div class="eyebrow">
+About Fastnexa USA
+</div>
+
+<h2>
+Technology made simpler.
+</h2>
+
+<p class="intro">
+We focus on practical digital solutions that help businesses communicate clearly,
+look professional and build a stronger presence online.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="contact" id="contact">
+
+<div class="contactin">
+
+<div class="eyebrow" style="color:#8db5ff">
+Let's connect
+</div>
+
+<h2>
+Ready to start?
+</h2>
+
+<p>
+Tell us what you need and we'll discuss the next step.
+</p>
+
+<div class="contactbox">
+
+<p>
+<strong>Email:</strong> hello@fastnexausa.com
+</p>
+
+<p>
+<strong>WhatsApp:</strong> +1 606 468 3334
+</p>
+
+<p>
+<strong>Telegram:</strong> @fastnexausa
+</p>
+
+<a class="btn"
+href="https://wa.me/16064683334"
+target="_blank"
+rel="noopener">
+WhatsApp
+</a>
+
+<a class="btn alt"
+href="https://t.me/fastnexausa"
+target="_blank"
+rel="noopener">
+Telegram
+</a>
+
+<a class="btn"
+href="mailto:hello@fastnexausa.com">
+Email Us
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+© 2026 Fastnexa USA. All rights reserved.
+</footer>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://cbcqktsporbfubfyjdpd.supabase.co";
+
+const SUPABASE_ANON_KEY =
+"sb_publishable_l9F1Q_dguZpJUs-PmimxNQ_Qq09y3Sr";
+
+const BUCKET = "uploads";
+
+
+async function loadGallery(){
+
+const gallery =
+document.getElementById("galleryGrid");
+
+
+try{
+
+const response = await fetch(
+
+`${SUPABASE_URL}/storage/v1/object/list/${BUCKET}`,
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json",
+
+"apikey":SUPABASE_ANON_KEY,
+
+"Authorization":
+`Bearer ${SUPABASE_ANON_KEY}`
+
+},
+
+body:JSON.stringify({
+
+prefix:"",
+
+limit:100,
+
+offset:0,
+
+sortBy:{
+
+column:"created_at",
+
+order:"desc"
+
+}
+
+})
+
+}
+
+);
+
+
+if(!response.ok){
+
+throw new Error(
+"Could not load images"
+);
+
+}
+
+
+const files =
+await response.json();
+
+
+const images =
+files.filter(file =>
+/\.(jpg|jpeg|png|gif|webp|svg)$/i
+.test(file.name)
+);
+
+
+if(!images.length){
+
+gallery.innerHTML =
+'<p class="gallerymsg">No images found.</p>';
+
+return;
+
+}
+
+
+gallery.innerHTML = "";
+
+
+images.forEach(file => {
+
+
+const imageUrl =
+
+`${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${encodeURIComponent(file.name)}`;
+
+
+const item =
+document.createElement("div");
+
+
+item.className =
+"galleryitem";
+
+
+item.innerHTML = `
+
+<img
+src="${imageUrl}"
+alt="Fastnexa USA image"
+loading="lazy"
+>
+
+<p>${file.name}</p>
+
+`;
+
+
+gallery.appendChild(item);
+
+
+});
+
+
+}
+
+catch(error){
+
+console.error(error);
+
+gallery.innerHTML =
+'<p class="gallerymsg">Unable to load gallery images.</p>';
+
+}
+
+}
+
+
 loadGallery();
+
 </script>
+
+</body>
+</html>
